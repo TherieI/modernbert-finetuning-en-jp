@@ -1,12 +1,21 @@
 from transformers import pipeline
+from argparse import ArgumentParser
 
-classifier = pipeline(
-    "text-classification",
-    model="./modernbert-politeness"
-)
+def main():
+    parser = ArgumentParser("test_model")
+    parser.add_argument("model", help="name of the model")
+    parser.add_argument("input", help="example sentence to parse")
 
-text = "Enter three into the calculator and you should get your results"
+    args = parser.parse_args()
 
-result = classifier(text)
+    classifier = pipeline(
+        "text-classification",
+        model=f"./{args.model}"
+    )
 
-print(result)
+    result = classifier(args.input)
+
+    print(result)
+
+if __name__ == "__main__":
+    main()
