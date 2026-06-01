@@ -6,8 +6,8 @@ from argparse import ArgumentParser
 def calc_score(result: list[dict[str, Any]]) -> float:
     total = 0.0
     for i, score in enumerate(sorted(result, key=lambda content: int(content['label'][-1]))):
-        total += score['score'] * (i + 1)
-    return (total - 1) / len(result)
+        total += score['score'] * i
+    return total / (len(result) - 1)
 
 def main():
     parser = ArgumentParser("test_model")
