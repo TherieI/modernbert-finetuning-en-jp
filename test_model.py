@@ -23,9 +23,11 @@ def main():
 
     result = classifier(args.input, top_k=None)
 
-    print(result)
     print(sorted(result, key=lambda content: int(content['label'][-1])))
-    print(calc_score(result))
+
+    s = calc_score(result)
+    s = 1-s if args.model == "modernbert-politeness-ja" else s
+    print(s)
 
 if __name__ == "__main__":
     main()
