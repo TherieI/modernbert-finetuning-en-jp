@@ -1,6 +1,9 @@
+__pycache__/
 results/
 .venv/
 modernbert-politeness/
 modernbert-politeness-ja/
+datasets/
 keico_corpus.csv
 .python-version
+test.py
