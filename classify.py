@@ -5,7 +5,6 @@ from sentiment import calc_score
 EN_MODEL_NAME = "modernbert-politeness"
 JP_MODEL_NAME = "modernbert-politeness-ja"
 
-
 def get_classifiers():
     classifier_en = pipeline(
         "text-classification",
@@ -21,7 +20,7 @@ def stanford_politeness():
     (classifier_en, classifier_jp) = get_classifiers()
 
     results = []
-    with open("stanford_politeness_sentences_all.json", "r", encoding="utf-8") as f:
+    with open("datasets/stanford_politeness_translations.json", "r", encoding="utf-8") as f:
         for i, content in enumerate(json.load(f)):
 
             en_class = classifier_en(content["en"], top_k=None)
@@ -58,14 +57,14 @@ def stanford_politeness():
 
             print(f"[{i}] Analysis complete")
 
-    with open("results.json", "w", encoding="utf-8") as f:
+    with open("results/stanford_politeness_results.json", "w", encoding="utf-8") as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
 
 def ronantakizawa():
     (classifier_en, classifier_jp) = get_classifiers()
 
     results = []
-    with open("ronantakizawa_sentences.json", "r", encoding="utf-8") as f:
+    with open("datasets/ronantakizawa_translations.json", "r", encoding="utf-8") as f:
         for i, content in enumerate(json.load(f)):
 
             jp_class = classifier_jp(content["jp"], top_k=None)
@@ -102,7 +101,7 @@ def ronantakizawa():
 
             print(f"[{i}] Analysis complete")
 
-    with open("ronantakizawa_results.json", "w", encoding="utf-8") as f:
+    with open("results/ronantakizawa_results.json", "w", encoding="utf-8") as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
 
 
